@@ -1,0 +1,18 @@
+type Mutation {
+    createUser(input: CreateUserDto!) : String
+}
+
+type User {
+    firstName: String!
+    lastName: String!
+    email: String!
+    phoneNumber: String!
+    id: String!
+}
+
+input CreateUserDto {
+    firstName: String!
+    lastName: String!
+    email: String!
+    phoneNumber: String
+}
