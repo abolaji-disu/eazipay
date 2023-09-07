@@ -1,5 +1,5 @@
 type Mutation {
-    createUser(input: CreateUserInput!) : String!
+    createUser(input: CreateUserInput!) : User!
 }
 
 type Query {

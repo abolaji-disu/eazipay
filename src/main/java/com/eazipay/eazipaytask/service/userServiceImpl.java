@@ -4,22 +4,24 @@ import com.eazipay.eazipaytask.dto.CreateUserInput;
 import com.eazipay.eazipaytask.models.User;
 import com.eazipay.eazipaytask.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class userServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
     @Override
-    public String createUser(CreateUserInput createUserInput){
+    public User createUser(CreateUserInput createUserInput){
 
         if (userRepository.existsByEmail(createUserInput.getEmail())){
             System.out.println("user exist in db");
         }
 
-        userRepository.save(User.builder()
+     User newUser =  userRepository.save(User.builder()
                         .email(createUserInput.getEmail())
                         .firstName(createUserInput.getFirstName())
                         .lastName(createUserInput.getLastName())
@@ -27,7 +29,10 @@ public class userServiceImpl implements UserService {
                         .password(createUserInput.getPassword())
                 .build());
 
-        return "User Succesfully created";
+        log.info("logging new user info");
+        log.info(newUser.toString());
+
+        return newUser;
 
     }
 }
