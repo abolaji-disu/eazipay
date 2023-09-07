@@ -1,5 +1,9 @@
 type Mutation {
-    createUser(input: CreateUserDto!) : String
+    createUser(input: CreateUserInput!) : String!
+}
+
+type Query {
+    getUserById(id: String) : User
 }
 
 type User {
@@ -7,12 +11,14 @@ type User {
     lastName: String!
     email: String!
     phoneNumber: String!
+    password: String!
     id: String!
 }
 
-input CreateUserDto {
+input CreateUserInput {
     firstName: String!
     lastName: String!
     email: String!
-    phoneNumber: String
+    password: String!
+    phoneNumber: String!
 }
