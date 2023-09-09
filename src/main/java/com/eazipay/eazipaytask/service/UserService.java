@@ -1,8 +1,11 @@
 package com.eazipay.eazipaytask.service;
 
 import com.eazipay.eazipaytask.dto.CreateUserInput;
-import com.eazipay.eazipaytask.models.User;
+import com.eazipay.eazipaytask.dto.LoginInput;
+import com.eazipay.eazipaytask.dto.LoginOutput;
+import com.eazipay.eazipaytask.models.AppUser;
 
 public interface UserService {
-    User createUser (CreateUserInput req);
+    AppUser createUser (CreateUserInput req);
+    LoginOutput logIn (LoginInput req);
 }

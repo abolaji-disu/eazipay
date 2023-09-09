@@ -1,4 +1,4 @@
 package com.eazipay.eazipaytask.dto;
 
-public class CreateUserResponse {
+public class LoginOutput {
 }
