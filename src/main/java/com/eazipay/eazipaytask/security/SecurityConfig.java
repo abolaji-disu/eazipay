@@ -58,22 +58,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("api/v1/user/register",
-                        "api/v1/user/editInvoice",
-                        "api/v1/user/authenticate",
-                        "api/v1/user/updateProfile",
-                        "api/v1/user/confirmPayment",
-                        "api/v1/user/upload/{userId}",
-                        "api/v1/user/generateInvoice",
-                        "api/v1/user/createInventory",
-                        "api/v1/user/addItemToInvoice",
-                        "api/v1/user/addItemToInventory",
-                        "api/v1/user/sendInvoice/{invoiceId}",
-                        "api/v1/user/cancelInvoice/{invoiceId}",
-                        "api/v1/user/generateReceipt/{invoiceId}",
-                        "api/v1/user/extendPaymentTime/{invoiceId}",
-                        "api/v1/user/viewTransactionRecord/{appUserId}"
-                        )
+                .requestMatchers("/graphiql/**", "/api/v1/users/user", "/api/v1/users/hello" , "/api/v1/users/**")
                 .permitAll()
                 .and()
                 .authorizeHttpRequests()
