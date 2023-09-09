@@ -23,7 +23,7 @@ public class UserSecurityInfoService implements UserDetailsService {
         try {
             return userInfo.map(AppUserInfoDetails::new)
                     .orElseThrow(() -> new UserNotFoundException(
-                            String.format("%S%S%S", "user with business name",
+                            String.format("%S%S%S", "user with Email",
                                     username, "not found")));
         } catch (UserNotFoundException e) {
             throw new RuntimeException(e);

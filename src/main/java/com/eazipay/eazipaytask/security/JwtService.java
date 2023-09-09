@@ -18,6 +18,7 @@ import java.util.function.Function;
 public class JwtService {
 
     private final String SECRET_KEY = System.getenv("ENCODER_KEY");
+
     public String generateToken(String username){
         Map<String, Object> claims = new HashMap<>();
             return createToken(claims, username);

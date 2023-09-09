@@ -58,7 +58,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/graphiql/**", "/api/v1/users/user", "/api/v1/users/hello" , "/api/v1/users/**")
+                .requestMatchers("/graphiql/**",
+                        "/graphql/**",
+                        "/graphiql?path=/graphql",
+                        "/api/v1/users/user",
+                        "/api/v1/users/test" ,
+                        "/api/v1/users/**")
                 .permitAll()
                 .and()
                 .authorizeHttpRequests()
