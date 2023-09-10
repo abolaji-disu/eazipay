@@ -60,8 +60,6 @@ public class userServiceImpl implements UserService {
                 .message("Successful")
                 .build();
 
-
-
     }
 
     private  boolean isUserCredentialsValid(LoginInput req, AppUser user, String userPassword) {
