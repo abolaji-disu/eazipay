@@ -51,12 +51,12 @@ public class userServiceImpl implements UserService {
         String userPassword  = user.getPassword();
         boolean isUserCredentialsValid = isUserCredentialsValid(req, user, userPassword);
 
-        if (isUserCredentialsValid) {
-            token = jwtService.generateToken(req.getEmail());
-        }
+        token = jwtService.generateToken(req.getEmail());
+
+        if (isUserCredentialsValid) token = jwtService.generateToken(req.getEmail());
 
         return LoginOutput.builder()
-                .token(jwtService.generateToken(req.getEmail()))
+                .token(token)
                 .message("Successful")
                 .build();
 
@@ -65,7 +65,6 @@ public class userServiceImpl implements UserService {
     }
 
     private  boolean isUserCredentialsValid(LoginInput req, AppUser user, String userPassword) {
-
       return new BCryptPasswordEncoder().encode(req.getPassword()).equals(userPassword) && user.getEmail().equals(req.getEmail());
 
     }
