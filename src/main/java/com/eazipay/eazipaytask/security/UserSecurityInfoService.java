@@ -1,6 +1,6 @@
 package com.eazipay.eazipaytask.security;
 
-import com.eazipay.eazipaytask.exception.UserNotFoundException;
+import com.eazipay.eazipaytask.exception.AppUserException;
 import com.eazipay.eazipaytask.models.AppUser;
 import com.eazipay.eazipaytask.repository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +22,10 @@ public class UserSecurityInfoService implements UserDetailsService {
        Optional<AppUser> userInfo =  appUserRepository.findUserByEmail(username);
         try {
             return userInfo.map(AppUserInfoDetails::new)
-                    .orElseThrow(() -> new UserNotFoundException(
+                    .orElseThrow(() -> new AppUserException(
                             String.format("%S%S%S", "user with Email",
                                     username, "not found")));
-        } catch (UserNotFoundException e) {
+        } catch (AppUserException e) {
             throw new RuntimeException(e);
         }
     }

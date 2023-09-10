@@ -12,9 +12,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class GraphqlExceptionResolver extends DataFetcherExceptionResolverAdapter {
 
+
     @Override
-    public GraphQLError resolveToSingleError(Throwable ex, DataFetchingEnvironment env) {
-        if (ex instanceof AppUserExistException) {
+    public GraphQLError resolveToSingleError( Throwable ex, DataFetchingEnvironment env) {
+        if (ex instanceof AppUserException) {
             return GraphqlErrorBuilder.newError()
                     .errorType(ErrorType.BAD_REQUEST)
                     .message(ex.getMessage())
@@ -25,4 +26,5 @@ public class GraphqlExceptionResolver extends DataFetcherExceptionResolverAdapte
             return null;
         }
     }
+
 }

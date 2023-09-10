@@ -3,8 +3,19 @@ type Mutation {
 }
 
 type Query {
-    getUserById(id: String) : User
+    logIn(input: LoginInput!) : LoginOutput!
 }
+
+input LoginInput {
+    email: String!
+    password: String!
+}
+
+type LoginOutput {
+    token: String!
+    message: String!
+}
+
 
 type User {
     firstName: String!

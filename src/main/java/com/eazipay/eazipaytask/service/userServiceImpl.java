@@ -3,15 +3,16 @@ package com.eazipay.eazipaytask.service;
 import com.eazipay.eazipaytask.dto.CreateUserInput;
 import com.eazipay.eazipaytask.dto.LoginInput;
 import com.eazipay.eazipaytask.dto.LoginOutput;
-import com.eazipay.eazipaytask.exception.AppUserExistException;
+import com.eazipay.eazipaytask.exception.AppUserException;
 import com.eazipay.eazipaytask.models.AppUser;
 import com.eazipay.eazipaytask.repository.AppUserRepository;
 import com.eazipay.eazipaytask.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -25,7 +26,7 @@ public class userServiceImpl implements UserService {
     public AppUser createUser(CreateUserInput createUserInput){
 
         if (userRepository.existsByEmail(createUserInput.getEmail()))
-            throw new AppUserExistException("User Already Exist");
+            throw new AppUserException("User Already Exist");
 
         String encodedPassword = new BCryptPasswordEncoder().encode(createUserInput.getPassword());
 
@@ -40,6 +41,32 @@ public class userServiceImpl implements UserService {
 
     @Override
     public LoginOutput logIn(LoginInput req) {
-        return null;
+
+        String token = null;
+        Optional<AppUser> appUser = userRepository.findUserByEmail(req.getEmail());
+
+        if (appUser.isEmpty()) throw new AppUserException("User does not Exist");
+        AppUser user = appUser.get();
+
+        String userPassword  = user.getPassword();
+        boolean isUserCredentialsValid = isUserCredentialsValid(req, user, userPassword);
+
+        if (isUserCredentialsValid) {
+            token = jwtService.generateToken(req.getEmail());
+        }
+
+        return LoginOutput.builder()
+                .token(jwtService.generateToken(req.getEmail()))
+                .message("Successful")
+                .build();
+
+
+
+    }
+
+    private  boolean isUserCredentialsValid(LoginInput req, AppUser user, String userPassword) {
+
+      return new BCryptPasswordEncoder().encode(req.getPassword()).equals(userPassword) && user.getEmail().equals(req.getEmail());
+
     }
 }
