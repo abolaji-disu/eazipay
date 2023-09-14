@@ -63,6 +63,7 @@ public class SecurityConfig {
                         "/graphiql?path=/graphql",
                         "/api/v1/users/user",
                         "/api/v1/users/test" ,
+                        "/api/v1/webhooks/test",
                         "/api/v1/users/**")
                 .permitAll()
                 .and()
