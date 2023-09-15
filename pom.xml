@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.eazipay</groupId>
-    <artifactId>eazipay-task</artifactId>
+    <artifactId>eazipayTask</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>eazipay-task</name>
     <description>eazipay-task</description>
