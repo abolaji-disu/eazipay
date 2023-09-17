@@ -28,7 +28,7 @@ public class MongodbTriggerController {
     @PostMapping(value="webhooks/test", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<WebhookResponse> processTrigger(@RequestBody WebhookRequest request){
         log.info("logging request");
-        log.info(request.getName() + " " + request.getColor());
+        log.info(request.getAllUpdatedProperties().toString());
         WebhookResponse res = schemaWatcher.processTrigger(request);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
