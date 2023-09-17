@@ -59,6 +59,7 @@ public class SecurityConfig {
         return httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/graphiql/**",
+                        "https://eazipay-backend-services.onrender.com/api/v1/webhooks/test",
                         "/graphql/**",
                         "/graphiql?path=/graphql",
                         "/api/v1/users/user",
